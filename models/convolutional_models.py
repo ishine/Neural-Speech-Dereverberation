@@ -1,25 +1,13 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import sys
-
-class UnetImportError(Exception):
-    def __init__(self):
-        self.message = 'Clone U-net repository first \n ' \
-                       'git clone http://github.com//milesial/Pytorch-UNet'
-        super().__init__(self.message)
-
-try:
-    sys.path.append('Pytorch-UNet')
-    sys.path.append('Pytorch-UNet/unet')
-    from unet_parts import * # clone unet repository or it doesnt work!
-except ModuleNotFoundError:
-    raise UnetImportError()
+from unet_parts import *
 
 #################################
 # U-net for speech dereverberation
 # base implementation on http://github.com//milesial/Pytorch-UNet
 #################################
+
 class UNetRev(nn.Module):
     def __init__(self, n_channels, bilinear=True, confine = True):
         super(UNetRev, self).__init__()
